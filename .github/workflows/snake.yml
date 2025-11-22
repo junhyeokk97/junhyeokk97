@@ -1,0 +1,38 @@
+name: Generate Snake Graph
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"  # 12시간마다 자동 생성
+  workflow_dispatch:        # 수동 실행 가능
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Generate Snake
+        uses: Platane/snk@v3
+        with:
+          github_user_name: junhyeokk97
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+
+      - name: Push snake artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: snake
+          path: dist/github-contribution-grid-snake.svg
+
+      - name: Commit and push result
+        run: |
+          mkdir -p output
+          cp dist/github-contribution-grid-snake.svg output/
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add output/github-contribution-grid-snake.svg
+          git commit -m "Update snake graph" || echo "No changes"
+          git push
