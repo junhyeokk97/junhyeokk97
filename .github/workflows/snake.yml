@@ -1,0 +1,39 @@
+name: Generate Snake Graph
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write   # push 권한 부여
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate Snake SVG
+        uses: Platane/snk@v3
+        with:
+          github_user_name: junhyeokk97
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: snake-svg
+          path: dist/github-contribution-grid-snake.svg
+
+      - name: Deploy to output branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: output
