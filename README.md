@@ -1,11 +1,6 @@
 # 👋 안녕하세요, 최준혁입니다  
 AI · Machine Learning · Deep Learning을 중심으로 공부하며 코드를 정리하는 개발자입니다.
 
-<p align="center">
-<img src="https://github-readme-stats.vercel.app/api?username=junhyeokk97&show_icons=true&theme=default&hide_border=true" height="165">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=junhyeokk97&layout=compact&theme=default&hide_border=true" height="165">
-</p>
-
 ---
 
 ## 🧰 Tech Stack
